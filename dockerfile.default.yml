@@ -1,0 +1,15 @@
+from: ${PROFZONE_DOCKER_REGISTRY}/profzone/golang:runtime
+image: ${PROFZONE_DOCKER_REGISTRY}/${PROJECT_GROUP}/${PROJECT_NAME}:${PROJECT_VERSION}
+workdir: /go/bin
+env:
+  GOENV: DEV
+  S_ROBOTCLIENT_REMOTEADDR: 127.0.0.1:9090
+add:
+  ./config: ./config
+  ./profzone.yml: ./
+  ./vehicle-robot-host: ./
+expose:
+- "80"
+cmd:
+- ./vehicle-robot-host
+- -c=false
