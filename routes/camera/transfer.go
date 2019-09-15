@@ -7,6 +7,7 @@ import (
 	"github.com/johnnyeven/vehicle-robot-host/global"
 	"github.com/johnnyeven/vehicle-robot-host/modules"
 	"github.com/sirupsen/logrus"
+	"gocv.io/x/gocv"
 	"image/jpeg"
 )
 
@@ -21,6 +22,10 @@ func (r *Camera) Transfer(req *client.CameraRequest) *tp.Status {
 	if err != nil {
 		logrus.Errorf("modules.ConvertImageToMat err: %v", err)
 		return nil
+	}
+
+	if global.Config.Window == nil {
+		global.Config.Window = gocv.NewWindow("Camera")
 	}
 	global.Config.Window.IMShow(mat)
 	global.Config.Window.WaitKey(1)

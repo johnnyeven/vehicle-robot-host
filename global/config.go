@@ -19,5 +19,4 @@ var Config = struct {
 		RemoteAddr: "robot.profzone.net:9090",
 		NodeKey:    "456",
 	},
-	Window: gocv.NewWindow("Display"),
 }
