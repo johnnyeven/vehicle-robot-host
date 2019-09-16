@@ -19,15 +19,22 @@ import (
 	"fmt"
 	"github.com/johnnyeven/libtools/servicex"
 	"github.com/johnnyeven/vehicle-robot-host/cmd"
+	"github.com/johnnyeven/vehicle-robot-host/global"
 	_ "github.com/johnnyeven/vehicle-robot-host/global"
 	"github.com/johnnyeven/vehicle-robot-host/routes"
 	"os"
+	"runtime"
 	"strings"
 )
 
 func main() {
+	runtime.LockOSThread()
 	servicex.Execute()
 	routes.InitRouters()
+
+	defer func() {
+		global.Config.Window.Close()
+	}()
 
 	var command string
 	scanner := bufio.NewScanner(os.Stdin)
